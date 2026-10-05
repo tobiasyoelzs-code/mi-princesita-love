@@ -35,12 +35,13 @@
         font-family: Arial, Helvetica, sans-serif;
         background: radial-gradient(circle at top, #fff8fb 0%, #ffe5f2 25%, #ffd3ea 50%, #ffc4e1 100%);
         color: var(--text);
+        padding: 1rem;
       }
 
       .scene {
         position: relative;
         width: min(94vw, 700px);
-        height: min(92vh, 820px);
+        min-height: min(92vh, 820px);
         display: grid;
         place-items: center;
         border-radius: 32px;
@@ -48,7 +49,7 @@
         box-shadow: 0 0 0 1px rgba(255,255,255,0.4), 0 25px 60px rgba(216, 90, 150, 0.28);
         overflow: hidden;
         backdrop-filter: blur(4px);
-        padding: 1rem;
+        padding: 2rem 1rem;
       }
 
       @supports not (backdrop-filter: blur(4px)) {
@@ -148,7 +149,6 @@
         z-index: 2;
         width: min(80%, 570px);
         text-align: center;
-        padding: 2rem 1rem;
       }
 
       .heart-main {
@@ -206,21 +206,150 @@
         text-wrap: pretty;
       }
 
+      .music-controls {
+        position: relative;
+        z-index: 3;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .music-btn {
+        background: linear-gradient(135deg, var(--pink-soft), var(--pink));
+        border: none;
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(238, 122, 178, 0.4);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .music-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(238, 122, 178, 0.6);
+      }
+
+      .music-btn:active {
+        transform: translateY(0);
+      }
+
+      .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .volume-control input {
+        width: 100px;
+        cursor: pointer;
+      }
+
+      .share-section {
+        position: relative;
+        z-index: 3;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid rgba(238, 122, 178, 0.3);
+      }
+
+      .share-title {
+        font-size: 0.9rem;
+        color: var(--text);
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .share-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+
+      .share-btn {
+        background: linear-gradient(135deg, var(--pink-light), var(--pink-soft));
+        border: 2px solid var(--pink);
+        color: var(--text);
+        padding: 0.7rem 1.2rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .share-btn:hover {
+        background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(238, 122, 178, 0.4);
+      }
+
+      .share-btn:active {
+        transform: translateY(0);
+      }
+
+      .email-link {
+        color: var(--pink-deep);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .email-link:hover {
+        text-decoration: underline;
+      }
+
+      audio {
+        display: none;
+      }
+
       @media (max-width: 540px) {
         .scene {
           width: min(96vw, 700px);
-          height: min(95vh, 820px);
           border-radius: 22px;
         }
 
         .message {
           width: min(88%, 570px);
-          padding: 1rem 0.5rem;
         }
 
         .subtitle {
           line-height: 1.6;
           font-size: 1rem;
+        }
+
+        .music-controls {
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+
+        .volume-control {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .volume-control input {
+          width: 80%;
+        }
+
+        .share-buttons {
+          gap: 0.6rem;
+        }
+
+        .share-btn {
+          font-size: 0.8rem;
+          padding: 0.6rem 1rem;
         }
       }
 
@@ -330,7 +459,97 @@
           Y sobre todo, eres lo mejor que me pasó en esta vida.<br>
           Te amooo, mi amorcito de mi vida ❤️
         </div>
+
+        <div class="music-controls">
+          <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+            <span id="musicIcon">🎵</span>
+            <span id="musicText">Reproducir Música</span>
+          </button>
+          <div class="volume-control">
+            <label for="volumeControl">🔊</label>
+            <input type="range" id="volumeControl" min="0" max="100" value="70" onchange="setVolume(this.value)">
+          </div>
+        </div>
+
+        <div class="share-section">
+          <div class="share-title">✨ Comparte este mensaje de amor ✨</div>
+          <div class="share-buttons">
+            <button class="share-btn" onclick="shareByEmail()">📧 Enviar por Email</button>
+            <button class="share-btn" onclick="shareByWhatsApp()">💬 Compartir en WhatsApp</button>
+            <button class="share-btn" onclick="copyLink()">🔗 Copiar Enlace</button>
+          </div>
+        </div>
       </section>
     </main>
+
+    <audio id="bgMusic" loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script>
+      let isPlaying = false;
+      const audio = document.getElementById('bgMusic');
+      const musicBtn = document.getElementById('musicBtn');
+      const musicText = document.getElementById('musicText');
+      const musicIcon = document.getElementById('musicIcon');
+
+      window.addEventListener('load', function() {
+        audio.volume = 0.7;
+      });
+
+      function toggleMusic() {
+        if (isPlaying) {
+          audio.pause();
+          isPlaying = false;
+          musicText.textContent = 'Reproducir Música';
+          musicIcon.textContent = '🎵';
+          musicBtn.style.opacity = '0.7';
+        } else {
+          audio.play().catch(function(error) {
+            console.log('Autoplay bloqueado por el navegador:', error);
+          });
+          isPlaying = true;
+          musicText.textContent = 'Pausar Música';
+          musicIcon.textContent = '⏸️';
+          musicBtn.style.opacity = '1';
+        }
+      }
+
+      function setVolume(value) {
+        audio.volume = value / 100;
+      }
+
+      function shareByEmail() {
+        const subject = encodeURIComponent('Te amo mi Princesita ❤️');
+        const body = encodeURIComponent(
+          'Mi amor,\n\nAlguien especial quiso compartir este mensaje contigo:\n\n' +
+          window.location.href +
+          '\n\n¡Que disfrutes esta página tan linda hecha con amor! ❤️'
+        );
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+      }
+
+      function shareByWhatsApp() {
+        const text = encodeURIComponent(
+          'Te amo mi Princesita ❤️\n\nMira lo que preparé para ti:\n' +
+          window.location.href
+        );
+        window.open(`https://wa.me/?text=${text}`, '_blank');
+      }
+
+      function copyLink() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(function() {
+          const originalText = event.target.textContent;
+          event.target.textContent = '✓ ¡Copiado!';
+          setTimeout(function() {
+            event.target.textContent = originalText;
+          }, 2000);
+        }).catch(function() {
+          alert('No se pudo copiar el enlace');
+        });
+      }
+    </script>
   </body>
 </html>
