@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envía Tu Mensaje de Amor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at top, #fff8fb 0%, #ffe5f2 25%, #ffd3ea 50%, #ffc4e1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(216, 90, 150, 0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #d85a96;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #651a4a;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #651a4a;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffd7eb;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: #651a4a;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="email"]:focus,
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ee7ab2;
+            box-shadow: 0 0 0 3px rgba(238, 122, 178, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-send {
+            background: linear-gradient(135deg, #ffb6d8, #ee7ab2);
+            color: white;
+        }
+        
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(238, 122, 178, 0.4);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #ffd7eb, #ffb6d8);
+            color: #651a4a;
+        }
+        
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(238, 122, 178, 0.3);
+        }
+        
+        .link-preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff1f8;
+            border-radius: 10px;
+            border-left: 4px solid #ee7ab2;
+        }
+        
+        .link-preview p {
+            color: #651a4a;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .link-box {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px dashed #ffd7eb;
+            word-break: break-all;
+            font-size: 0.85rem;
+            color: #d85a96;
+            font-family: monospace;
+        }
+        
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            border-radius: 5px;
+            color: #2e7d32;
+        }
+        
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #e65100;
+            font-size: 0.9rem;
+        }
+        
+        .heart {
+            font-size: 2rem;
+            animation: beat 1.4s infinite;
+        }
+        
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+        }
+        
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 6s infinite ease-in;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsContainer"></div>
+    
+    <div class="container">
+        <h1><span class="heart">❤️</span></h1>
+        <h1>Mi Princesita</h1>
+        <p class="subtitle">Comparte tu mensaje de amor</p>
+        
+        <div class="info-box">
+            💌 Personaliza el mensaje y comparte este enlace especial por email
+        </div>
+        
+        <form onsubmit="generateEmailLink(event)">
+            <div class="form-group">
+                <label for="recipientEmail">Email del destinatario:</label>
+                <input type="email" id="recipientEmail" placeholder="tu.amorcito@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="customMessage">Mensaje personalizado (opcional):</label>
+                <textarea id="customMessage" placeholder="Escribe un mensaje especial..."></textarea>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="btn-send">📧 Generar Email</button>
+                <button type="button" class="btn-copy" onclick="copyEmailLink()">📋 Copiar Link</button>
+            </div>
+        </form>
+        
+        <div class="link-preview">
+            <p><strong>Tu enlace de compartición:</strong></p>
+            <div class="link-box" id="generatedLink">
+                Se generará cuando completes el formulario
+            </div>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            ✓ ¡Copiado! Ya puedes pegar el enlace donde quieras
+        </div>
+    </div>
+    
+    <script>
+        // Generar corazones flotantes
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            for (let i = 0; i < 5; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = '❤';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+            }
+        }
+        
+        createFloatingHearts();
+        
+        // Obtener la URL base
+        const baseURL = 'https://tobiasyoelzs-code.github.io/mi-princesita-love/';
+        
+        function generateEmailLink(e) {
+            e.preventDefault();
+            
+            const recipientEmail = document.getElementById('recipientEmail').value;
+            const customMessage = document.getElementById('customMessage').value;
+            
+            // Crear el enlace con parámetros
+            let emailLink = baseURL;
+            if (customMessage) {
+                emailLink += '?msg=' + encodeURIComponent(customMessage);
+            }
+            
+            // Actualizar el preview
+            document.getElementById('generatedLink').textContent = emailLink;
+            
+            // Crear el link de email
+            const subject = encodeURIComponent('Te amo mi Princesita ❤️');
+            const body = encodeURIComponent(
+                `Hola amor,\n\nQuise compartir este mensaje especial contigo:\n\n${emailLink}\n\n` +
+                (customMessage ? `Mi mensaje para ti:\n"${customMessage}"\n\n` : '') +
+                `¡Que disfrutes esta página tan linda hecha con amor! ❤️\n\nTe quiero mucho`
+            );
+            
+            const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+            
+            // Abrir el cliente de email
+            window.location.href = mailtoLink;
+        }
+        
+        function copyEmailLink() {
+            const link = document.getElementById('generatedLink').textContent;
+            
+            if (link === 'Se generará cuando completes el formulario') {
+                alert('Por favor completa el formulario primero');
+                return;
+            }
+            
+            navigator.clipboard.writeText(link).then(() => {
+                const message = document.getElementById('successMessage');
+                message.style.display = 'block';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 3000);
+            });
+        }
+        
+        // Pre-llenar campos si vienen en la URL
+        window.addEventListener('load', function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('msg')) {
+                document.getElementById('customMessage').value = params.get('msg');
+            }
+        });
+    </script>
+</body>
+</html>
