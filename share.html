@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparte tu amor - Mi Princesita</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #fff1f8 0%, #ffe5f2 50%, #ffc4e1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(216, 90, 150, 0.3);
+            text-align: center;
+        }
+        
+        .heart-big {
+            font-size: 56px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: heartBeat 1.4s ease-in-out infinite;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.2); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.2); }
+            70% { transform: scale(1); }
+        }
+        
+        h1 {
+            color: #d85a96;
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            color: #ee7ab2;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .divider {
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ee7ab2, transparent);
+            margin: 20px auto 30px;
+        }
+        
+        .message {
+            color: #651a4a;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-link {
+            background: linear-gradient(135deg, #ee7ab2 0%, #d85a96 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(216, 90, 150, 0.35);
+        }
+        
+        .btn-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(216, 90, 150, 0.45);
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #1fa952 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+        }
+        
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.45);
+        }
+        
+        .btn-copy {
+            background: #ffd7eb;
+            color: #651a4a;
+            border: 2px solid #ee7ab2;
+            box-shadow: 0 5px 15px rgba(238, 122, 178, 0.2);
+        }
+        
+        .btn-copy:hover {
+            background: #ee7ab2;
+            color: white;
+            box-shadow: 0 8px 20px rgba(238, 122, 178, 0.35);
+        }
+        
+        .info-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 13px;
+            text-align: left;
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: #155724;
+            font-size: 14px;
+        }
+        
+        .footer {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(238, 122, 178, 0.15);
+            color: #651a4a;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .url-box {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-size: 12px;
+            color: #d85a96;
+            font-family: monospace;
+            border: 1px solid #ffd7eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="heart-big">💖</div>
+            <h1>Mi Princesita</h1>
+            <p class="subtitle">Comparte tu amor</p>
+            
+            <div class="divider"></div>
+            
+            <p class="message">
+                ¡Envía este mensaje especial a la persona que amas por WhatsApp o correo!
+            </p>
+            
+            <div class="buttons-container">
+                <a href="https://wa.me/?text=Te%20amo%20mi%20Princesita%20%F0%9F%92%96%0A%0AMira%20lo%20que%20prepar%C3%A9%20para%20ti%3A%0Ahttps%3A%2F%2Ftobiasyoelzs-code.github.io%2Fmi-princesita-love%2F" 
+                   target="_blank" 
+                   class="btn btn-whatsapp">
+                    💬 Enviar por WhatsApp
+                </a>
+                
+                <a href="mailto:?subject=Te%20amo%20mi%20Princesita%20%F0%9F%92%96&body=Hola%20amor%2C%0A%0AAlguien%20especial%20quiso%20compartir%20este%20mensaje%20contigo%3A%0A%0Ahttps%3A%2F%2Ftobiasyoelzs-code.github.io%2Fmi-princesita-love%2F%0A%0A%C2%A1Que%20disfrutes%20esta%20p%C3%A1gina%20tan%20linda%20hecha%20con%20amor!%20%F0%9F%98%98%0A%0ATe%20quiero%20mucho%20%E2%9D%A4%EF%B8%8F" 
+                   class="btn btn-link">
+                    📧 Enviar por Email
+                </a>
+                
+                <button class="btn btn-copy" onclick="copyLink()">
+                    🔗 Copiar Enlace
+                </button>
+            </div>
+            
+            <div class="url-box" id="urlDisplay">
+                https://tobiasyoelzs-code.github.io/mi-princesita-love/
+            </div>
+            
+            <div class="info-box">
+                💡 <strong>Tip:</strong> Haz clic en "Enviar por WhatsApp" para abrir WhatsApp directamente con el mensaje ya escrito.
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                ✓ ¡Copiado! Ya puedes pegar el enlace donde quieras
+            </div>
+            
+            <div class="footer">
+                Te amooo mi amorcito de mi vida ❤️
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function copyLink() {
+            const url = 'https://tobiasyoelzs-code.github.io/mi-princesita-love/';
+            navigator.clipboard.writeText(url).then(() => {
+                const message = document.getElementById('successMessage');
+                message.style.display = 'block';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 3000);
+            }).catch(() => {
+                alert('No se pudo copiar. Por favor intenta nuevamente.');
+            });
+        }
+    </script>
+</body>
+</html>
